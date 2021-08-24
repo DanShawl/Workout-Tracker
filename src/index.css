@@ -12,8 +12,13 @@ code {
     monospace;
 }
 
-input {
+/* input {
   background-color: #f8f8f8;
   border: none;
   padding: 0.5em;
+} */
+
+li {
+  list-style-type: none;
+  text-align: left;
 }
