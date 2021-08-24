@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import './App.css';
-import { Button, FormControl, InputLabel, Input } from '@material-ui/core';
+import { Button, FormControl, Input, InputLabel } from '@material-ui/core';
+import Todo from './Todo';
 
 function App() {
   const [todos, setTodos] = useState([]);
@@ -16,10 +17,11 @@ function App() {
   return (
     <div className="App">
       <h1>To Do</h1>
-
+      {/* 
       <FormControl>
         <InputLabel>Add ToDo</InputLabel>
         <Input
+          
           type="text"
           value={input}
           onChange={(e) => setInput(e.target.value)}
@@ -34,10 +36,11 @@ function App() {
         disableElevation
       >
         Add Todo
-      </Button>
+      </Button> */}
 
-      {/* <form action="">
+      <form action="">
         <input
+          placeholder="grocery shopping"
           type="text"
           value={input}
           onChange={(e) => setInput(e.target.value)}
@@ -52,11 +55,11 @@ function App() {
         >
           Add Todo
         </Button>
-      </form> */}
+      </form>
 
       <ul>
         {todos.map((todo) => {
-          return <li>{todo}</li>;
+          return <Todo text={todo} />;
         })}
       </ul>
     </div>
@@ -71,3 +74,5 @@ export default App;
 //  3.  Map over the todo list to create a list of li items
 //  4.  Use state to manage user input and setup a button click event
 //  5.  Push input to todos
+//  6.  Factor out code to a component and implement material ui list
+//  7.  Add firebase (use config + the default code from video (1:35))
