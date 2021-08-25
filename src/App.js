@@ -34,12 +34,12 @@ function App() {
 
   return (
     <div className="App">
-      <h1>To Do</h1>
-      {/* 
+      <h1>Exercise List</h1>
+      {/*
       <FormControl>
         <InputLabel>Add ToDo</InputLabel>
         <Input
-          
+
           type="text"
           value={input}
           onChange={(e) => setInput(e.target.value)}
@@ -58,7 +58,7 @@ function App() {
 
       <form action="">
         <input
-          placeholder="grocery shopping"
+          placeholder="Back Squat"
           type="text"
           value={input}
           onChange={(e) => setInput(e.target.value)}
@@ -71,7 +71,7 @@ function App() {
           color="primary"
           disableElevation
         >
-          Add Todo
+          Add Exercise
         </Button>
       </form>
 

@@ -1,1 +1,14 @@
+.todo__list {
+  margin: 0 auto;
 
+  display: flex;
+  align-items: center;
+  width: 100%;
+  /* border: 1px solid black; */
+  /* background-color: black; */
+}
+li {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
