@@ -8,53 +8,60 @@ import firebase from 'firebase';
 function App() {
   const [todos, setTodos] = useState([]);
   const [input, setInput] = useState('');
+  const [noteInput, setNote] = useState('');
 
-  //  when the app loads, we need to listen to the database and fetch new todos as they get added / removed
+  const [workouts, setWorkouts] = useState([]);
+  const [workoutName, setWorkoutName] = useState('');
+
+  //  when the app loads, we need to listen to the database and fetch new items as they get added / removed
   useEffect(() => {
+    // db.collection('workouts')
+    //   .orderBy('timestamp', 'desc')
+    //   .onSnapshot((snapshot) => {
+    //     setWorkouts(
+    //       snapshot.docs.map((doc) => ({
+
+    //   }))
+    //     )
+    //   });
+
     db.collection('todos')
-      .orderBy('timestamp', 'desc')
+      .orderBy('timestamp', 'asc')
       .onSnapshot((snapshot) => {
         setTodos(
-          snapshot.docs.map((doc) => ({ id: doc.id, todo: doc.data().todo }))
+          snapshot.docs.map((doc) => ({
+            id: doc.id,
+            todo: doc.data().todo,
+            note: doc.data().note,
+          }))
         );
         //docs is every todo
       });
   }, []);
 
+  // const addWorkout = (e) => {
+  //   e.preventDefault();
+  //   db.collection('workouts').add({
+  //     workoutName: 'lower body',
+  //     exercises: ['Squat', 'RDL', 'Nordic'],
+  //   });
+  // };
   const addTodo = (e) => {
     e.preventDefault();
     db.collection('todos').add({
       todo: input,
+      note: noteInput,
       timestamp: firebase.firestore.FieldValue.serverTimestamp(),
     });
     //  with the above code, we dont need to worry about the setTodos in this function. when anything is added to the db, it will fire off a snapshot which will then update the todos list
     // setTodos([...todos, input]);
     setInput('');
+    setNote('');
   };
 
   return (
     <div className="App">
       <h1>Exercise List</h1>
-      {/*
-      <FormControl>
-        <InputLabel>Add ToDo</InputLabel>
-        <Input
-
-          type="text"
-          value={input}
-          onChange={(e) => setInput(e.target.value)}
-        />
-      </FormControl>
-      <Button
-        type="submit"
-        onClick={addTodo}
-        disabled={!input}
-        variant="contained"
-        color="primary"
-        disableElevation
-      >
-        Add Todo
-      </Button> */}
 
       <form action="">
         <input
@@ -63,10 +70,17 @@ function App() {
           value={input}
           onChange={(e) => setInput(e.target.value)}
         />
+        <input
+          placeholder="Note"
+          type="text"
+          value={noteInput}
+          onChange={(e) => setNote(e.target.value)}
+        />
+
         <Button
           type="submit"
           onClick={addTodo}
-          disabled={!input}
+          disabled={!input || !noteInput}
           variant="contained"
           color="primary"
           disableElevation
@@ -74,6 +88,33 @@ function App() {
           Add Exercise
         </Button>
       </form>
+      {/* 
+      <form action="">
+        <h1>{workoutName}</h1>
+        <input
+          placeholder="Workout name"
+          type="text"
+          value={workoutName}
+          onChange={(e) => setWorkoutName(e.target.value)}
+        />
+        <input
+          placeholder="Note"
+          type="text"
+          value={noteInput}
+          onChange={(e) => setNote(e.target.value)}
+        />
+
+        <Button
+          type="submit"
+          onClick={addTodo}
+          disabled={!input || !noteInput}
+          variant="contained"
+          color="primary"
+          disableElevation
+        >
+          Add Exercise
+        </Button>
+      </form> */}
 
       <ul>
         {todos.map((todo) => {
@@ -111,3 +152,24 @@ export default App;
 //        pass todo as a prop to the todo component
 //        create a button with the onclick prop that deletes it
 //        db.collection('todos').doc(props.todo.id).delete();
+
+//  {/*
+//       <FormControl>
+//         <InputLabel>Add ToDo</InputLabel>
+//         <Input
+
+//           type="text"
+//           value={input}
+//           onChange={(e) => setInput(e.target.value)}
+//         />
+//       </FormControl>
+//       <Button
+//         type="submit"
+//         onClick={addTodo}
+//         disabled={!input}
+//         variant="contained"
+//         color="primary"
+//         disableElevation
+//       >
+//         Add Todo
+//       </Button> */}

@@ -13,12 +13,19 @@ code {
     monospace;
 }
 
+form {
+  margin: 1em;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
 input {
   background-color: #f8f8f8;
   border: none;
   padding: 0.7em;
-  margin-right: 0.75em;
-  width: 40%;
+  /* margin-right: 0.75em; */
+  width: calc(100%-0.7em);
 }
 ul {
   padding: 0;

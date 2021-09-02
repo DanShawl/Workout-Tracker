@@ -61,7 +61,7 @@ function Todo(props) {
       </Modal>
       <List className="todo__list">
         <ListItem>
-          <ListItemText primary={props.todo.todo} secondary="sets reps etc" />
+          <ListItemText primary={props.todo.todo} secondary={props.todo.note} />
         </ListItem>
         <EditIcon onClick={(e) => setOpen(true)} />
         {/* <button onClick={(e) => setOpen(true)}>Edit</button> */}
